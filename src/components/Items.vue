@@ -1,21 +1,21 @@
 <template>
   <div class="hello">
     <div class="holder">
-      <form  @submit.prevent="addSkill">
-        <input type="text" placeholder="Enter a skill you have..." v-model="skill" v-validate="'min:5'" name="skill">
+      <form  @submit.prevent="addTask">
+        <input type="text" placeholder="Enter a task..." v-model="task" v-validate="'min:5'" name="task">
 
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-          <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+          <p class="alert" v-if="errors.has('task')">{{ errors.first('task') }}</p>
         </transition>
       </form>
 
       <ul>
         <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-          <li v-for="(data, index) in skills" :key='index'>{{ data.skill }}</li>
+          <li v-for="(data, index) in tasks" :key='index'>{{ data.task }}</li>
         </transition-group>
       </ul>
 
-      <p>These are the skills that you possess</p>
+      <p>Here's your tasks for the day.</p>
     </div>
   </div>
 </template>
@@ -25,19 +25,19 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      skill: '',
-      skills: [
-        { "skill": "Vue.js"},
-        { "skill": "Frontend Developer"}
+      task: '',
+      tasks: [
+        { "task": "Take out the trash"},
+        { "task": "Learn a new technology!"}
       ]
     }
   },
   methods: {
-    addSkill() {
+    addTask() {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.skills.push({skill: this.skill});
-          this.skill = '';
+          this.tasks.push({task: this.task});
+          this.task = '';
         } else {
           console.log('Not valid');
         }
