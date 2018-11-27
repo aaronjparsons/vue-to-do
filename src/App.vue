@@ -24,7 +24,6 @@ body {
   display: grid;
   grid-template-rows: auto;
   justify-items: center;
-  align-items: center;
 }
 body, html {
   margin: 0;
